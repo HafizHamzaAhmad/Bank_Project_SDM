@@ -2,17 +2,19 @@ import Banking.*;
 import Interest.BasicInterest;
 import Interest.SpecialInterest;
 import MainPackage.MainClass;
+import Reporting.Over1000Report;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 import org.junit.Test;
 
 import java.util.Date;
+import java.util.List;
 //import static org.junit.jupiter.api
 
 
 public class TestBank extends TestCase {
 
-    //Following tests are for testing Interest system implemented with State Design Pattern
+    //Tests for State Design Pattern
     public void testForInterestCalculationPass() {
         try {
             MainClass.prepareBanks();
@@ -36,7 +38,7 @@ public class TestBank extends TestCase {
         }
     }
 
-    //Following tests are for testing Interest system implemented with Command Design Pattern
+    //Tests for Command Design Pattern
     public void testForTransferCmd() {
         MainClass.prepareBanks();
         Bank bank = MainClass.getBank(2);
@@ -106,6 +108,21 @@ public class TestBank extends TestCase {
         bankA.withdraw(accNo, balance);
 //		assertEquals(true,bankA.withdraw(3, 900.0));
 
+    }
+
+    //Test for Visitor Design Pattern
+    public void testOver1000Report() {
+        MainClass.prepareBanks();
+        Bank bank = MainClass.getBank(1);
+        List<IAccount> resultList = bank.doReport(new Over1000Report());
+        for (IAccount acc : resultList ) {
+            if(acc.getClass().equals(Account.class)) {
+                assertTrue(acc.getBalance() > 1000.00);
+            }
+            else if (acc.getClass().equals(DebitAccount.class)) {
+                assertTrue(acc.getDebitLimit() > 1000);
+            }
+        }
     }
 }
 
