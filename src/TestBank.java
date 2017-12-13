@@ -68,5 +68,48 @@ public class TestBank extends TestCase {
 		} catch (Exception e) {
 		}
 	}
+
+		public void testOpenAccount() {
+
+			Bank bankA = new Bank(1, "WBK");
+			bankA.getAccounts().add(new Account(1, "Hamza", new Date(), 8500.00, false, new BasicInterest()));
+			bankA.getAccounts().add(new Account(2, "Rohail", new Date(), 1200.00, false, new SpecialInterest()));
+			bankA.getAccounts().add(new DebitAccount(new Account(3, "Omer", new Date(), 1500.00, true, new BasicInterest(), 500.00)));
+
+			String name = "Faheem";
+			Double balance = 900.0;
+			assertTrue(bankA.openAccount(name, balance,false, new BasicInterest()));
+		}
+
+		public void testCreditAccount() {
+
+			Bank bankA = new Bank(1, "WBK");
+			bankA.getAccounts().add(new Account(1, "Hamza", new Date(), 8500.00, false, new BasicInterest()));
+			bankA.getAccounts().add(new Account(2, "Rohail", new Date(), 1200.00, false, new SpecialInterest()));
+			bankA.getAccounts().add(new DebitAccount(new Account(3, "Omer", new Date(), 1500.00, true, new BasicInterest(), 500.00)));
+
+
+			String name = "Hamza";
+			Double balance = 900.0;
+			bankA.openAccount(name, balance,false,new BasicInterest());
+			assertEquals(true, bankA.creditAccount(name, 900.0));
+		}
+
+		public void testWithdrawAccount() throws Exception {
+
+
+			Bank bankA = new Bank(1, "WBK");
+			bankA.getAccounts().add(new Account(1, "Hamza", new Date(), 8500.00, false, new BasicInterest()));
+			bankA.getAccounts().add(new Account(2, "Rohail", new Date(), 1200.00, false, new SpecialInterest()));
+			bankA.getAccounts().add(new DebitAccount(new Account(3, "Omer", new Date(), 1500.00, true, new BasicInterest(), 500.00)));
+
+			Integer accNo=3;
+			Double balance = 900.0;
+
+			bankA.withdraw(accNo, balance);
+//		assertEquals(true,bankA.withdraw(3, 900.0));
+
+		}
+	}
 }
 
