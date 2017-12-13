@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class MainClass {
 
-	private static BanksMediator banksMediator = new BanksMediator();
+	public static BanksMediator banksMediator = new BanksMediator();
 	
 	public static void main(String[] args) {
 

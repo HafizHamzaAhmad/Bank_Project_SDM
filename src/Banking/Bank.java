@@ -94,19 +94,7 @@ public class Bank {
 		IAccount account = findAccount(accountNo);
 
 		account.withdraw(amount, account);
-		/*for (Banking.IAccount account : accounts) {
-			if(account.getID()== accountNo) {
-				account.withdraw(amount, account);
-				*//*if(account.getAccountType()) {
-					Banking.DebitAccount dbAcc = new Banking.DebitAccount();
-					account = dbAcc.withdraw(amount, account);
-				}
-				else {
-					Banking.Account acc = new Banking.Account();
-					account = acc.withdraw(amount, account);
-				}*//*
-			}
-		}*/
+
 	}
 
 	public List<IAccount> doReport(Visitor visitor) {
